@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Fly : MonoBehaviour
 {
-    Vector3 startPosition;
-    Vector2 direction = Vector2.up;
+    Vector2 startPosition;
+    [SerializeField] Vector2 direction = Vector2.up;
+    [SerializeField] float maxDistance = 2;
+    [SerializeField] float speed = 2;
 
     // Start is called before the first frame update
     void Start()
@@ -16,10 +16,11 @@ public class Fly : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(direction * Time.deltaTime);
+        transform.Translate(direction.normalized * Time.deltaTime * speed);
         var distance = Vector2.Distance(startPosition, transform.position);
-        if (distance >= 2)
+        if (distance >= maxDistance)
         {
+            transform.position = startPosition + (direction.normalized * maxDistance);
             direction *= -1;
         }
     }
