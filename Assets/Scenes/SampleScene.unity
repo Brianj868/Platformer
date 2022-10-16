@@ -967,6 +967,7 @@ GameObject:
   - component: {fileID: 1535954412}
   - component: {fileID: 1535954411}
   - component: {fileID: 1535954414}
+  - component: {fileID: 1535954415}
   m_Layer: 0
   m_Name: flyFly1
   m_TagString: Untagged
@@ -1076,6 +1077,42 @@ MonoBehaviour:
   direction: {x: 1, y: 1}
   maxDistance: 2
   speed: 2
+--- !u!60 &1535954415
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535954410}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.0285715, y: 0.51428574}
+    newSize: {x: 1.0285715, y: 0.51428574}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.028571429, y: 0.25714287}
+      - {x: -0.1, y: 0.24285714}
+      - {x: -0.12857144, y: 0.25714287}
+      - {x: -0.45714286, y: 0.25714287}
+      - {x: -0.51428574, y: 0.22857143}
+      - {x: -0.51428574, y: -0.014285714}
+      - {x: -0.32857144, y: -0.25714287}
+      - {x: 0.35714287, y: -0.25714287}
+      - {x: 0.42857143, y: -0.24285714}
+      - {x: 0.51428574, y: -0.028571429}
+      - {x: 0.51428574, y: 0.25714287}
 --- !u!1 &1630789216
 GameObject:
   m_ObjectHideFlags: 0

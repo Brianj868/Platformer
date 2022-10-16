@@ -24,4 +24,13 @@ public class Fly : MonoBehaviour
             direction *= -1;
         }
     }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        var Player = collision.GetComponent<Player>();
+        if (Player != null)
+        {
+            Player.ResetToStart();
+        }
+    }
 }
