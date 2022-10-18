@@ -4,11 +4,15 @@ public class Player : MonoBehaviour
 {
     [SerializeField] float speed = 1;
     [SerializeField] float jumpForce = 200;
-    Vector3 startPosition;
+    [SerializeField] int maxJumps = 2;
 
+    Vector3 startPosition;
+    int jumpsRemaining;
+    
     void Start()
     {
         startPosition = transform.position;
+        jumpsRemaining = maxJumps;
     }
 
     void Update()
@@ -32,10 +36,16 @@ public class Player : MonoBehaviour
             spriteRenderer.flipX = horizontal < 0;
         }
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && jumpsRemaining > 0)
         {
             rigidbody2D.AddForce(Vector2.up * jumpForce);
+            jumpsRemaining--;
         }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        jumpsRemaining = maxJumps;
     }
 
     internal void ResetToStart()
