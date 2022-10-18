@@ -250,6 +250,7 @@ MonoBehaviour:
   maxJumps: 2
   feet: {fileID: 1276447043}
   downPull: 0.1
+  maxJumpDuration: 0.1
 --- !u!95 &95869204
 Animator:
   serializedVersion: 4
