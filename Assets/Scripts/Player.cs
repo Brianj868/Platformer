@@ -5,10 +5,11 @@ public class Player : MonoBehaviour
     [SerializeField] float speed = 1;
     [SerializeField] float jumpForce = 200;
     [SerializeField] int maxJumps = 2;
+    [SerializeField] Transform feet;
 
     Vector3 startPosition;
     int jumpsRemaining;
-    
+
     void Start()
     {
         startPosition = transform.position;
@@ -45,7 +46,11 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        jumpsRemaining = maxJumps;
+        var hit = Physics2D.OverlapCircle(feet.position, 0.1f, LayerMask.GetMask("Default"));
+        if (hit != null)
+        {
+            jumpsRemaining = maxJumps;
+        }
     }
 
     internal void ResetToStart()
