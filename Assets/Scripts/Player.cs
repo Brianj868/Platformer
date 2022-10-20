@@ -31,7 +31,6 @@ public class Player : MonoBehaviour
         if (Mathf.Abs(horizontal) >= 1)
         {
             rigidbody2D.velocity = new Vector2(horizontal, rigidbody2D.velocity.y);
-            Debug.Log($"Velocity = {rigidbody2D.velocity}");
         }
 
         var animator = GetComponent<Animator>();
@@ -48,6 +47,7 @@ public class Player : MonoBehaviour
         {
             rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, jumpVelocity);
             jumpsRemaining--;
+            Debug.Log($"Jumps Remaining {jumpsRemaining}");
             fallTimer = 0;
             jumpTimer = 0;
         }
@@ -55,10 +55,11 @@ public class Player : MonoBehaviour
         {
             rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, jumpVelocity);
             fallTimer = 0;
-            jumpTimer += Time.deltaTime;
         }
 
-        if (isGrounded)
+        jumpTimer += Time.deltaTime;
+
+        if (isGrounded && fallTimer > 0)
         {
             fallTimer = 0;
             jumpsRemaining = maxJumps;
