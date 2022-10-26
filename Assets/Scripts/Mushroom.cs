@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Mushroom : MonoBehaviour
 {
-    [SerializeField] float bounceVelocity = 6;
+    [SerializeField] float _bounceVelocity = 6;
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -12,7 +12,7 @@ public class Mushroom : MonoBehaviour
             var rigidbody2D = player.GetComponent<Rigidbody2D>();
             if (rigidbody2D != null)
             {
-                rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, bounceVelocity);
+                rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, _bounceVelocity);
             }
         }
     }

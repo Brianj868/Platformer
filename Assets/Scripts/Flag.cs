@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Flag : MonoBehaviour
 {
-    [SerializeField] string sceneName;
+    [SerializeField] string _sceneName;
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -23,6 +23,6 @@ public class Flag : MonoBehaviour
     IEnumerator LoadAfterDelay()
     {
        yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(_sceneName);
     }
 }

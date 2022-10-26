@@ -2,16 +2,16 @@ using UnityEngine;
 
 public class SpringBoard : MonoBehaviour
 {
-    [SerializeField] float bounceVelocity = 6;
-    [SerializeField] Sprite downSprite;
+    [SerializeField] float _bounceVelocity = 6;
+    [SerializeField] Sprite _downSprite;
 
-    SpriteRenderer spriteRenderer;
-    Sprite upSprite;
+    SpriteRenderer _spriteRenderer;
+    Sprite _upSprite;
 
     void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        upSprite = spriteRenderer.sprite;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _upSprite = _spriteRenderer.sprite;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -22,8 +22,8 @@ public class SpringBoard : MonoBehaviour
             var rigidbody2D = player.GetComponent<Rigidbody2D>();
             if (rigidbody2D != null)
             {
-                rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, bounceVelocity);
-                spriteRenderer.sprite = downSprite;
+                rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, _bounceVelocity);
+                _spriteRenderer.sprite = _downSprite;
             }
         }
     }
@@ -33,7 +33,7 @@ public class SpringBoard : MonoBehaviour
         var player = collision.collider.GetComponent<Player>();
         if (player != null)
         {
-            spriteRenderer.sprite = upSprite;
+            _spriteRenderer.sprite = _upSprite;
         }
     }
 }

@@ -2,26 +2,26 @@ using UnityEngine;
 
 public class Fly : MonoBehaviour
 {
-    Vector2 startPosition;
-    [SerializeField] Vector2 direction = Vector2.up;
-    [SerializeField] float maxDistance = 2;
-    [SerializeField] float speed = 2;
+    Vector2 _startPosition;
+    [SerializeField] Vector2 _direction = Vector2.up;
+    [SerializeField] float _maxDistance = 2;
+    [SerializeField] float _speed = 2;
 
     // Start is called before the first frame update
     void Start()
     {
-        startPosition = transform.position;
+        _startPosition = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(direction.normalized * Time.deltaTime * speed);
-        var distance = Vector2.Distance(startPosition, transform.position);
-        if (distance >= maxDistance)
+        transform.Translate(_direction.normalized * Time.deltaTime * _speed);
+        var distance = Vector2.Distance(_startPosition, transform.position);
+        if (distance >= _maxDistance)
         {
-            transform.position = startPosition + (direction.normalized * maxDistance);
-            direction *= -1;
+            transform.position = _startPosition + (_direction.normalized * _maxDistance);
+            _direction *= -1;
         }
     }
 }
