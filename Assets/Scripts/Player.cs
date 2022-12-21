@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     SpriteRenderer _spriteRenderer;
     float _horizontal;
     bool _isGrounded;
-    bool _onIce;
+    bool _isOnSlipperySurface;
 
     void Start()
     {
@@ -35,9 +35,12 @@ public class Player : MonoBehaviour
     void Update()
     {
         UpdateIsGrounded();
-        UpdateOnIce();
         ReadHorizontalInput();
-        //SlipHorizontal();
+
+        if (_isOnSlipperySurface)
+            SlipHorizontal();
+        else
+            MoveHorizontal();
 
         UpdateAnimator();
         UpdateSpriteDirection();
@@ -61,10 +64,6 @@ public class Player : MonoBehaviour
             _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _rigidbody2D.velocity.y - downForce);
         }
 
-        if (_onIce)
-            SlipHorizontal();
-        else
-            MoveHorizontal();
     }
 
     void ContinueJump()
@@ -132,12 +131,11 @@ public class Player : MonoBehaviour
     {
         var hit = Physics2D.OverlapCircle(_feet.position, 0.1f, LayerMask.GetMask("Default"));
         _isGrounded = hit != null;
-    }
 
-    void UpdateOnIce()
-    {
-        var hit = Physics2D.OverlapCircle(_feet.position, 0.1f, LayerMask.GetMask("Default")).tag;
-        _onIce = hit == "Slippery";
+        if (hit != null)
+            _isOnSlipperySurface = hit.CompareTag("Slippery");
+        else
+            _isOnSlipperySurface = false;
     }
 
     internal void ResetToStart()
