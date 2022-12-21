@@ -588,7 +588,7 @@ GameObject:
   - component: {fileID: 404932402}
   m_Layer: 0
   m_Name: snowMid
-  m_TagString: Untagged
+  m_TagString: Slippery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -602,7 +602,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 404932401}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 20fa34f18ac1db54385dc719f11bb6d4, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0

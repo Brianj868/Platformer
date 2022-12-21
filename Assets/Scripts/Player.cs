@@ -2,7 +2,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [Header("Movement")]
     [SerializeField] float _speed = 1;
+    [SerializeField] float _slipFactor = 1;
+    [Header("Jump")]
     [SerializeField] float _jumpVelocity = 10;
     [SerializeField] int _maxJumps = 2;
     [SerializeField] Transform _feet;
@@ -18,6 +21,7 @@ public class Player : MonoBehaviour
     SpriteRenderer _spriteRenderer;
     float _horizontal;
     bool _isGrounded;
+    bool _onIce;
 
     void Start()
     {
@@ -31,8 +35,9 @@ public class Player : MonoBehaviour
     void Update()
     {
         UpdateIsGrounded();
+        UpdateOnIce();
         ReadHorizontalInput();
-        MoveHorizontal();
+        //SlipHorizontal();
 
         UpdateAnimator();
         UpdateSpriteDirection();
@@ -55,6 +60,11 @@ public class Player : MonoBehaviour
             var downForce = _downPull * _fallTimer * _fallTimer;
             _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _rigidbody2D.velocity.y - downForce);
         }
+
+        if (_onIce)
+            SlipHorizontal();
+        else
+            MoveHorizontal();
     }
 
     void ContinueJump()
@@ -84,10 +94,19 @@ public class Player : MonoBehaviour
 
     void MoveHorizontal()
     {
-        if (Mathf.Abs(_horizontal) >= 1)
-        {
-            _rigidbody2D.velocity = new Vector2(_horizontal, _rigidbody2D.velocity.y);
-        }
+        
+        _rigidbody2D.velocity = new Vector2(_horizontal * _speed, _rigidbody2D.velocity.y);
+    }
+
+    void SlipHorizontal()
+    {
+        var desiredVelocity = new Vector2(_horizontal * _speed, _rigidbody2D.velocity.y);
+        var smoothedVelocity = Vector2.Lerp(
+            _rigidbody2D.velocity,
+            desiredVelocity,
+            Time.deltaTime / _slipFactor);
+
+        _rigidbody2D.velocity = smoothedVelocity;
     }
 
     void ReadHorizontalInput()
@@ -113,6 +132,12 @@ public class Player : MonoBehaviour
     {
         var hit = Physics2D.OverlapCircle(_feet.position, 0.1f, LayerMask.GetMask("Default"));
         _isGrounded = hit != null;
+    }
+
+    void UpdateOnIce()
+    {
+        var hit = Physics2D.OverlapCircle(_feet.position, 0.1f, LayerMask.GetMask("Default")).tag;
+        _onIce = hit == "Slippery";
     }
 
     internal void ResetToStart()
