@@ -1,0 +1,13 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: P2 Walk
+  m_Controller: {fileID: 9100000, guid: a7538e8543f5a4641a420a8992b2ec73, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 53f074a11c72a4e49b30db1e357c019a, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 773c0ab99124ffd47a32498ed678cf83, type: 2}
