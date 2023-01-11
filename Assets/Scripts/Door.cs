@@ -11,22 +11,32 @@ public class Door : MonoBehaviour
     [SerializeField] SpriteRenderer _rendererTop;
     [SerializeField] int _requiredCoins = 5;
     [SerializeField] Door _exit;
+    [SerializeField] Canvas _canvas;
+
+    bool _open;
 
     [ContextMenu("Open Door")]
     void Open()
     {
+        _open = true;
         _rendererMid.sprite = _openMid;
         _rendererTop.sprite = _openTop;
+        
+        if(_canvas != null)
+            _canvas.enabled = false;
     }
 
     void Update()
     {
-        if (Coin.CoinsCollected >= _requiredCoins)
+        if (_open == false && Coin.CoinsCollected >= _requiredCoins)
             Open();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if (_open == false)
+            return;
+
         var player = collision.GetComponent<Player>();
         if (player != null && _exit != null)
         {
