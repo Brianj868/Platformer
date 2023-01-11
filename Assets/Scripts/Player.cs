@@ -144,6 +144,12 @@ public class Player : MonoBehaviour
 
     internal void ResetToStart()
     {
-        transform.position = _startPosition;
+        _rigidbody2D.position = _startPosition;
+    }
+
+    internal void TeleportTo(Vector3 position)
+    {
+        _rigidbody2D.position = position;
+        _rigidbody2D.velocity = Vector2.zero;
     }
 }
