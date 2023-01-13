@@ -12138,6 +12138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerInside: 0
+  _fallSpeed: 9
 --- !u!1 &788353068
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,9 @@ public class FallingPlatform : MonoBehaviour
     Coroutine _coroutine;
     Vector3 _initialPosition;
 
+    [SerializeField] float _fallSpeed = 3;
+    bool _falling;
+
     void Start()
     {
         _initialPosition = transform.position;
@@ -47,13 +50,31 @@ public class FallingPlatform : MonoBehaviour
             wiggleTimer += randomDelay;
         }
 
-        yield return new WaitForSeconds(1f);
         Debug.Log("Falling");
-        yield return new WaitForSeconds(3f);
+        _falling = true;
+        foreach(var collider in GetComponents<Collider2D>())
+        {
+            collider.enabled = false;
+        }
+
+        float fallTimer = 0;
+
+        while (fallTimer < 3)
+        {
+            transform.position += Vector3.down * Time.deltaTime * _fallSpeed;
+            fallTimer += Time.deltaTime;
+            Debug.Log(fallTimer);
+            yield return null;
+        }
+
+        Destroy(gameObject);
     }
 
     void OnTriggerExit2D(Collider2D collision)
     {
+        if (_falling)
+            return;
+
         var player = collision.GetComponent<Player>();
         if (player == null)
             return;
