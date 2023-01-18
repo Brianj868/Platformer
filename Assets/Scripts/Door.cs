@@ -16,7 +16,7 @@ public class Door : MonoBehaviour
     bool _open;
 
     [ContextMenu("Open Door")]
-    void Open()
+    public void Open()
     {
         _open = true;
         _rendererMid.sprite = _openMid;
