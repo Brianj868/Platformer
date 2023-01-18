@@ -10,4 +10,13 @@ public class KillOnEnter : MonoBehaviour
             Player.ResetToStart();
         }
     }
+
+    void OnParticleCollision(GameObject other)
+    {
+        var Player = other.GetComponent<Player>();
+        if (Player != null)
+        {
+            Player.ResetToStart();
+        }
+    }
 }
