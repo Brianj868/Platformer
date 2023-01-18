@@ -14,6 +14,12 @@ public class Collector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        foreach(var collectible in _collectibles)
+        {
+            if (collectible.isActiveAndEnabled)
+                return;
+        }
+
+        Debug.Log("Got All Gems");
     }
 }
