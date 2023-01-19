@@ -11,11 +11,12 @@ public class Collector : MonoBehaviour
     [SerializeField] List<Collectible> _collectibles;
     [SerializeField] UnityEvent _onCollectionComplete;
 
+    static Color _gizmoColor = new Color(0.61f, 0.61f, 0.61f, 1);
+
     TMP_Text _remainingText;
 
     int _countCollected;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         _remainingText = GetComponentInChildren<TMP_Text>();
@@ -45,5 +46,19 @@ public class Collector : MonoBehaviour
     void OnValidate()
     {
         _collectibles = _collectibles.Distinct().ToList();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.gray;
+        foreach (var collectible in _collectibles)
+        {
+            if (UnityEditor.Selection.activeGameObject == gameObject)
+                Gizmos.color = Color.yellow;
+            else
+                Gizmos.color = _gizmoColor;
+
+            Gizmos.DrawLine(transform.position, collectible.transform.position);
+        }
     }
 }
