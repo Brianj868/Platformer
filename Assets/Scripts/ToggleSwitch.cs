@@ -17,34 +17,35 @@ public class ToggleSwitch : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerStay2D(Collider2D collision)
     {
         var player = collision.GetComponent<Player>();
         if (player == null)
             return;
 
-        bool wasOnRight = collision.transform.position.x > transform.position.x;
-        //_spriteRenderer.sprite = wasOnRight ? _switchLeftSprite : _switchRightSprite;
+        var playerRigidBody = player.GetComponent<Rigidbody2D>();
+        if (playerRigidBody == null)
+            return;
 
-        if (wasOnRight)
-        {
-            TurnSwitchLeft();
-        }
-        else
-        {
-            TurnSwitchRight();
-        }
+        bool wasOnRight = collision.transform.position.x > transform.position.x;
+        bool playerWalkingRight = playerRigidBody.velocity.x > 0;
+        bool playerWalkingLeft = playerRigidBody.velocity.x < 0;
+
+        if (wasOnRight && playerWalkingRight)
+            _spriteRenderer.sprite = _switchRightSprite;
+        else if (!wasOnRight && playerWalkingLeft)
+            _spriteRenderer.sprite = _switchLeftSprite;
     }
 
     void TurnSwitchRight()
     {
-        _spriteRenderer.sprite = _switchRightSprite;
+       
         _onSwitchRight.Invoke();
     }
 
     void TurnSwitchLeft()
     {
-        _spriteRenderer.sprite = _switchLeftSprite;
+        
         _onSwitchLeft.Invoke();
     }
 }
