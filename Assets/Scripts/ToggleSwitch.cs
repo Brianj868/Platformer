@@ -7,10 +7,21 @@ public class ToggleSwitch : MonoBehaviour
 {
     [SerializeField] Sprite _switchLeftSprite;
     [SerializeField] Sprite _switchRightSprite;
+    [SerializeField] Sprite _switchCenterSprite;
     [SerializeField] UnityEvent _onSwitchLeft;
     [SerializeField] UnityEvent _onSwitchRight;
+    [SerializeField] UnityEvent _onSwitchCenter;
 
     SpriteRenderer _spriteRenderer;
+    ToggleDirection _currentDirection;
+    
+
+    enum ToggleDirection
+    {
+        Left,
+        Center,
+        Right,
+    }
 
     void Awake()
     {
@@ -33,25 +44,45 @@ public class ToggleSwitch : MonoBehaviour
 
         if (wasOnRight && playerWalkingRight)
         {
-            SetPosition(true);
+            SetToggleDirection(ToggleDirection.Right);
         }
         else if (!wasOnRight && playerWalkingLeft)
         {
-            SetPosition(false);
+            SetToggleDirection(ToggleDirection.Left);
         }
     }
 
-    void SetPosition(bool right)
+    void SetToggleDirection(ToggleDirection direction)
     {
-        if (right)
+        if (_currentDirection == direction)
+            return;
+
+        _currentDirection = direction;
+        switch (direction)
         {
-            _spriteRenderer.sprite = _switchRightSprite;
-            _onSwitchRight.Invoke();
+            case ToggleDirection.Left:
+                _spriteRenderer.sprite = _switchLeftSprite;
+                _onSwitchLeft.Invoke();
+                break;
+            case ToggleDirection.Center:
+                _spriteRenderer.sprite = _switchCenterSprite;
+                _onSwitchCenter.Invoke();
+                break;
+            case ToggleDirection.Right:
+                _spriteRenderer.sprite = _switchRightSprite;
+                _onSwitchRight.Invoke();
+                break;
+            default:
+                break;
         }
-        else
+
+        if (direction == ToggleDirection.Right)
         {
-            _spriteRenderer.sprite = _switchLeftSprite;
-            _onSwitchLeft.Invoke();
+           
+        }
+        else if (direction == ToggleDirection.Left)
+        {
+            
         }
     }
 }

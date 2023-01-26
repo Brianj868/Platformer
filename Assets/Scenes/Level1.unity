@@ -13109,6 +13109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _switchLeftSprite: {fileID: 21300000, guid: 505d79baa3f726442b17bf66fe68060b, type: 3}
   _switchRightSprite: {fileID: 21300000, guid: da65a9e6039c51440b98d4702ee6b1d1, type: 3}
+  _switchCenterSprite: {fileID: 21300000, guid: 1c56da307bd486549b6c7b8bf94c712a, type: 3}
   _onSwitchLeft:
     m_PersistentCalls:
       m_Calls:
@@ -13163,6 +13164,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  _onSwitchCenter:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!61 &466843035
 BoxCollider2D:
   m_ObjectHideFlags: 0
