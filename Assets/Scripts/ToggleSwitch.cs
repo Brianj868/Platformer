@@ -32,20 +32,26 @@ public class ToggleSwitch : MonoBehaviour
         bool playerWalkingLeft = playerRigidBody.velocity.x < 0;
 
         if (wasOnRight && playerWalkingRight)
-            _spriteRenderer.sprite = _switchRightSprite;
+        {
+            SetPosition(true);
+        }
         else if (!wasOnRight && playerWalkingLeft)
+        {
+            SetPosition(false);
+        }
+    }
+
+    void SetPosition(bool right)
+    {
+        if (right)
+        {
+            _spriteRenderer.sprite = _switchRightSprite;
+            _onSwitchRight.Invoke();
+        }
+        else
+        {
             _spriteRenderer.sprite = _switchLeftSprite;
-    }
-
-    void TurnSwitchRight()
-    {
-       
-        _onSwitchRight.Invoke();
-    }
-
-    void TurnSwitchLeft()
-    {
-        
-        _onSwitchLeft.Invoke();
+            _onSwitchLeft.Invoke();
+        }
     }
 }
