@@ -5,9 +5,12 @@ using UnityEngine.Events;
 
 public class ToggleSwitch : MonoBehaviour
 {
+    [SerializeField] ToggleDirection _startingDirection = ToggleDirection.Center;
+
     [SerializeField] Sprite _switchLeftSprite;
     [SerializeField] Sprite _switchRightSprite;
     [SerializeField] Sprite _switchCenterSprite;
+
     [SerializeField] UnityEvent _onSwitchLeft;
     [SerializeField] UnityEvent _onSwitchRight;
     [SerializeField] UnityEvent _onSwitchCenter;
@@ -23,9 +26,10 @@ public class ToggleSwitch : MonoBehaviour
         Right,
     }
 
-    void Awake()
+    void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        SetToggleDirection(_startingDirection, true);
     }
 
     void OnTriggerStay2D(Collider2D collision)
@@ -52,9 +56,9 @@ public class ToggleSwitch : MonoBehaviour
         }
     }
 
-    void SetToggleDirection(ToggleDirection direction)
+    void SetToggleDirection(ToggleDirection direction, bool force = false)
     {
-        if (_currentDirection == direction)
+        if (force == false && _currentDirection == direction)
             return;
 
         _currentDirection = direction;
@@ -75,14 +79,17 @@ public class ToggleSwitch : MonoBehaviour
             default:
                 break;
         }
+    }
 
-        if (direction == ToggleDirection.Right)
-        {
-           
-        }
-        else if (direction == ToggleDirection.Left)
-        {
-            
-        }
+    void OnValidate()
+    {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (_startingDirection == ToggleDirection.Left)
+            _spriteRenderer.sprite = _switchLeftSprite;
+        else if (_startingDirection == ToggleDirection.Center)
+            _spriteRenderer.sprite = _switchCenterSprite;
+        else if (_startingDirection == ToggleDirection.Right)
+            _spriteRenderer.sprite = _switchRightSprite;
     }
 }

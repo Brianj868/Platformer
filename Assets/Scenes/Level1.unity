@@ -13107,6 +13107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d067566236cb39a4a8e8fd1dd1922f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _startingDirection: 1
   _switchLeftSprite: {fileID: 21300000, guid: 505d79baa3f726442b17bf66fe68060b, type: 3}
   _switchRightSprite: {fileID: 21300000, guid: da65a9e6039c51440b98d4702ee6b1d1, type: 3}
   _switchCenterSprite: {fileID: 21300000, guid: 1c56da307bd486549b6c7b8bf94c712a, type: 3}
@@ -13166,7 +13167,31 @@ MonoBehaviour:
         m_CallState: 2
   _onSwitchCenter:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2042139741}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2030951182}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!61 &466843035
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -44919,7 +44944,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &2030951183
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -45030,7 +45055,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &2042139742
 BoxCollider2D:
   m_ObjectHideFlags: 0
