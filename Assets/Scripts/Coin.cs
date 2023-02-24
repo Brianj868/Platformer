@@ -12,10 +12,13 @@ public class Coin : MonoBehaviour
         if (player == null)
             return;
 
-        gameObject.SetActive(false);
         CoinsCollected++;
         Debug.Log(CoinsCollected);
 
         ScoreSystem.Add(100);
+        GetComponent<Collider2D>().enabled = false;
+        GetComponent<SpriteRenderer>().enabled = false;
+
+        GetComponent<AudioSource>().Play();
     }
 }
