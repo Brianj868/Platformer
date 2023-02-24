@@ -6,6 +6,8 @@ public class Coin : MonoBehaviour
 {
     public static int CoinsCollected;
 
+    [SerializeField] List<AudioClip> _audioClips;
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         var player = collision.GetComponent<Player>();
@@ -19,6 +21,13 @@ public class Coin : MonoBehaviour
         GetComponent<Collider2D>().enabled = false;
         GetComponent<SpriteRenderer>().enabled = false;
 
-        GetComponent<AudioSource>().Play();
+        if (_audioClips.Count > 0)
+        {
+            int _randomNumber = UnityEngine.Random.Range(0, _audioClips.Count - 1);
+            AudioClip clip = _audioClips[_randomNumber];
+            GetComponent<AudioSource>().PlayOneShot(clip);
+        }
+        else
+            GetComponent<AudioSource>().Play();
     }
 }
