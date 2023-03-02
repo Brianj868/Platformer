@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] float _downPull = 5;
     [SerializeField] float _maxJumpDuration = 0.1f;
 
+    AudioSource _audioSource;
     Vector3 _startPosition;
     int _jumpsRemaining;
     float _fallTimer;
@@ -31,6 +32,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         _startPosition = transform.position;
         _jumpsRemaining = _maxJumps;
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -93,6 +95,9 @@ public class Player : MonoBehaviour
         Debug.Log($"Jumps Remaining {_jumpsRemaining}");
         _fallTimer = 0;
         _jumpTimer = 0;
+
+        if (_audioSource != null)
+            _audioSource.Play();
     }
 
     bool ShouldStartJump()
