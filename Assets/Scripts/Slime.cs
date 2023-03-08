@@ -10,12 +10,14 @@ public class Slime : MonoBehaviour
     [SerializeField] Sprite _deadSprite;
 
     Rigidbody2D _rigidbody2D;
+    AudioSource _audioSource;
     float _direction = -1;
     
     // Start is called before the first frame update
     void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -78,6 +80,9 @@ public class Slime : MonoBehaviour
         GetComponent<Collider2D>().enabled = false;
         enabled = false;
         GetComponent<Rigidbody2D>().simulated = false;
+
+        if (_audioSource != null)
+            _audioSource.Play();
 
         float alpha = 1;
 
