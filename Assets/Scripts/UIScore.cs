@@ -9,10 +9,17 @@ public class UIScore : MonoBehaviour
     {
         _text = GetComponent<TMP_Text>();
         ScoreSystem.OnScoreChanged += UpdateScoreText;
+        UpdateScoreText(ScoreSystem.Score);
+    }
+
+    void OnDestroy()
+    {
+        ScoreSystem.OnScoreChanged -= UpdateScoreText;
     }
 
     void UpdateScoreText(int score)
     {
+        Debug.Log("Updating Score to " + score);
         _text.SetText(score.ToString());
     }
 }

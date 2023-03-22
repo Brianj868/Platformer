@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] Transform _feet;
     [SerializeField] float _downPull = 5;
     [SerializeField] float _maxJumpDuration = 0.1f;
+    [SerializeField] string _sceneName;
 
     AudioSource _audioSource;
     Vector3 _startPosition;
@@ -155,7 +157,8 @@ public class Player : MonoBehaviour
 
     internal void ResetToStart()
     {
-        _rigidbody2D.position = _startPosition;
+        //_rigidbody2D.position = _startPosition;
+        SceneManager.LoadScene(_sceneName);
     }
 
     internal void TeleportTo(Vector3 position)
