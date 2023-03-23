@@ -11,9 +11,12 @@ public class Player : MonoBehaviour
     [SerializeField] float _jumpVelocity = 10;
     [SerializeField] int _maxJumps = 2;
     [SerializeField] Transform _feet;
+    [SerializeField] Transform _leftSensor;
+    [SerializeField] Transform _rightSensor;
     [SerializeField] float _downPull = 5;
     [SerializeField] float _maxJumpDuration = 0.1f;
     [SerializeField] string _sceneName;
+    [SerializeField] float _wallSlideSpeed = 1;
 
     AudioSource _audioSource;
     Vector3 _startPosition;
@@ -58,6 +61,12 @@ public class Player : MonoBehaviour
         UpdateAnimator();
         UpdateSpriteDirection();
 
+        if (ShouldSlide())
+        {
+            Slide();
+            return;
+        }     
+
         if (ShouldStartJump())
             Jump();
         else if (ShouldContinueJump())
@@ -77,6 +86,33 @@ public class Player : MonoBehaviour
             _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _rigidbody2D.velocity.y - downForce);
         }
 
+    }
+
+    void Slide()
+    {
+        _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, -_wallSlideSpeed);
+    }
+
+    bool ShouldSlide()
+    {
+        if (_isGrounded)
+            return false;
+
+        if (_horizontal < 0)
+        {
+            var hit = Physics2D.OverlapCircle(_leftSensor.position, 0.1f);
+            if (hit != null && hit.CompareTag("Wall"))
+                return true;
+        }
+
+        if (_horizontal > 0)
+        {
+            var hit = Physics2D.OverlapCircle(_rightSensor.position, 0.1f);
+            if (hit != null && hit.CompareTag("Wall"))
+                return true;
+        }
+
+        return false;
     }
 
     void ContinueJump()
@@ -142,6 +178,7 @@ public class Player : MonoBehaviour
         bool walking = _horizontal != 0;
         _animator.SetBool("Walk", walking);
         _animator.SetBool("Jump", ShouldContinueJump());
+        _animator.SetBool("Slide", ShouldSlide());
     }
 
     void UpdateIsGrounded()
