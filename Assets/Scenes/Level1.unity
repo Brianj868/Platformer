@@ -28950,6 +28950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fireballPrefab: {fileID: 3379554681876349728, guid: 08f4a614ba8096a4b8e1df4d36cea156, type: 3}
+  _rate: 0.25
 --- !u!1 &1152251383
 GameObject:
   m_ObjectHideFlags: 0
@@ -37836,10 +37837,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3379554681876349732, guid: 08f4a614ba8096a4b8e1df4d36cea156, type: 3}
-      propertyPath: m_Radius
-      value: 0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 3379554681876349733, guid: 08f4a614ba8096a4b8e1df4d36cea156, type: 3}
       propertyPath: m_Name
       value: fireball
@@ -37993,7 +37990,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4011103031291374848, guid: f8ce2196066dd9a4eba759ee1c96cf37, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.00029717784
+      value: -0.00029717787
       objectReference: {fileID: 0}
     - target: {fileID: 4011103031291374849, guid: f8ce2196066dd9a4eba759ee1c96cf37, type: 3}
       propertyPath: _target
@@ -38025,7 +38022,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4011103031399797768, guid: f8ce2196066dd9a4eba759ee1c96cf37, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.00029717784
+      value: -0.00029717787
       objectReference: {fileID: 0}
     - target: {fileID: 4011103032096163245, guid: f8ce2196066dd9a4eba759ee1c96cf37, type: 3}
       propertyPath: m_Targets.Array.data[0].target
