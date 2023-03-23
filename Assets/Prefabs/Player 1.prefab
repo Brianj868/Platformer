@@ -225,11 +225,16 @@ MonoBehaviour:
   _jumpVelocity: 5
   _maxJumps: 2
   _feet: {fileID: 1066348345942824957}
-  _leftSensor: {fileID: 0}
-  _rightSensor: {fileID: 0}
+  _leftSensor: {fileID: 1574668347}
+  _rightSensor: {fileID: 286204217}
   _downPull: 0.5
   _maxJumpDuration: 0.1
   _sceneName: Menu
+  _wallSlideSpeed: 1
+  _acceleration: 10
+  _deceleration: 10
+  _airAcceleration: 2
+  _airDeceleration: 0
 --- !u!95 &1066348346888456106
 Animator:
   serializedVersion: 4

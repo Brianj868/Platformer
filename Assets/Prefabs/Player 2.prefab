@@ -233,8 +233,8 @@ MonoBehaviour:
   _wallSlideSpeed: 1
   _acceleration: 10
   _deceleration: 10
-  _airAcceleration: 1
-  _airDeceleration: 0.1
+  _airAcceleration: 2
+  _airDeceleration: 0
 --- !u!95 &8077370492388168550
 Animator:
   serializedVersion: 4
