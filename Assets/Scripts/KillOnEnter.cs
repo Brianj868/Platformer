@@ -2,6 +2,14 @@
 
 public class KillOnEnter : MonoBehaviour
 {
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        var Player = collision.collider.GetComponent<Player>();
+        if (Player != null)
+        {
+            Player.ResetToStart();
+        }
+    }
     void OnTriggerEnter2D(Collider2D collision)
     {
         var Player = collision.GetComponent<Player>();

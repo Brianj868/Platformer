@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Breakable : MonoBehaviour
+public class Breakable : MonoBehaviour, ITakeDamage
 {
     AudioSource _audioSource;
 
@@ -28,5 +28,10 @@ public class Breakable : MonoBehaviour
 
         GetComponent<Collider2D>().enabled = false;
         GetComponent<SpriteRenderer>().enabled = false;
+    }
+
+    public void TakeDamage()
+    {
+        TakeHit();
     }
 }
