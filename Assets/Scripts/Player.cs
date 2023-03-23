@@ -63,7 +63,10 @@ public class Player : MonoBehaviour
 
         if (ShouldSlide())
         {
-            Slide();
+            if (ShouldStartJump())
+                WallJump();
+            else
+                Slide();
             return;
         }     
 
@@ -88,6 +91,11 @@ public class Player : MonoBehaviour
 
     }
 
+    void WallJump()
+    {
+        _rigidbody2D.velocity = new Vector2(-_horizontal * _jumpVelocity, _jumpVelocity * 1.5f);
+    }
+
     void Slide()
     {
         _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, -_wallSlideSpeed);
@@ -96,6 +104,9 @@ public class Player : MonoBehaviour
     bool ShouldSlide()
     {
         if (_isGrounded)
+            return false;
+
+        if (_rigidbody2D.velocity.y > 0)
             return false;
 
         if (_horizontal < 0)
@@ -145,8 +156,8 @@ public class Player : MonoBehaviour
 
     void MoveHorizontal()
     {
-        
-        _rigidbody2D.velocity = new Vector2(_horizontal * _speed, _rigidbody2D.velocity.y);
+        float newHorizontal = Mathf.Lerp(_rigidbody2D.velocity.x, _horizontal * _speed, Time.deltaTime);
+        _rigidbody2D.velocity = new Vector2(newHorizontal, _rigidbody2D.velocity.y);
     }
 
     void SlipHorizontal()
