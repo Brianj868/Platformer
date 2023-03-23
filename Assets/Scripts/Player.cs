@@ -17,6 +17,10 @@ public class Player : MonoBehaviour
     [SerializeField] float _maxJumpDuration = 0.1f;
     [SerializeField] string _sceneName;
     [SerializeField] float _wallSlideSpeed = 1;
+    [SerializeField] float _acceleration = 1;
+    [SerializeField] float _deceleration = 1;
+    [SerializeField] float _airAcceleration = 1;
+    [SerializeField] float _airDeceleration = 1;
 
     AudioSource _audioSource;
     Vector3 _startPosition;
@@ -156,7 +160,11 @@ public class Player : MonoBehaviour
 
     void MoveHorizontal()
     {
-        float newHorizontal = Mathf.Lerp(_rigidbody2D.velocity.x, _horizontal * _speed, Time.deltaTime);
+        float smoothnessMultiplier = _horizontal == 0 ? _deceleration : _acceleration;
+        if (_isGrounded == false)
+            smoothnessMultiplier = _horizontal == 0 ? _airDeceleration : _airAcceleration;
+
+        float newHorizontal = Mathf.Lerp(_rigidbody2D.velocity.x, _horizontal * _speed, Time.deltaTime * smoothnessMultiplier);
         _rigidbody2D.velocity = new Vector2(newHorizontal, _rigidbody2D.velocity.y);
     }
 
